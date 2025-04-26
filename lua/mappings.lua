@@ -13,6 +13,10 @@ map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move Selection Up" })
 map("n", "<A-CR>", vim.lsp.buf.code_action, {})
 map("n", "K", vim.lsp.buf.hover, {})
 
+map("n", "<leader>cfm", function()
+    require("conform").format()
+end)
+
 --- MENU PLUGIN ---
 -- Keyboard users
 vim.keymap.set("n", "<C-t>", function()

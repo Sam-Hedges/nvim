@@ -22,6 +22,7 @@ M.nvdash = {
 
 M.mason = {
     pkgs = {
+        "stylua",
         "clangd",
         "clang-format",
     },

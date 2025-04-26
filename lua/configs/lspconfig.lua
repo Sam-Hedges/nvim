@@ -1,6 +1,6 @@
 require("nvchad.configs.lspconfig").defaults()
 
-local servers = { "html", "cssls", "clangd" }
+local servers = { "html", "cssls", "lua_ls", "clangd" }
 vim.lsp.enable(servers)
 
 -- lsps with default config
@@ -12,12 +12,17 @@ vim.lsp.enable(servers)
 --     }
 -- end
 
+local on_init = require("nvchad.configs.lspconfig").on_init
 local on_attach = require("nvchad.configs.lspconfig").on_attach
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 local lspconfig = require "lspconfig"
 
 -- C and CPP setup
 lspconfig.clangd.setup {
+    cmd = {
+        "clangd",
+        "--fallback-style={BasedOnStyle: llvm, IndentWidth: 4}",
+    },
     on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
@@ -27,9 +32,29 @@ lspconfig.clangd.setup {
     capabilities = capabilities,
 }
 
--- Without the loop, you would have to manually set up each LSP
---
--- lspconfig.html.setup {
---   on_attach = nvlsp.on_attach,
---   capabilities = nvlsp.capabilities,
--- }
+-- Lua setup
+lspconfig.lua_ls.setup {
+    settings = {
+        Lua = {
+            runtime = {
+                version = "LuaJIT",
+            },
+            diagnostics = {
+                globals = { "vim" },
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
+    on_attach = function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+        on_attach(client, bufnr)
+    end,
+    on_init = on_init,
+    capabilities = capabilities,
+}

@@ -4,7 +4,7 @@ local options = {
     formatters_by_ft = {
         lua = { "stylua" },
         c = { "clang-format" },
-        cpp = { "clang-format" },
+        cpp = { "clang-format", args = '--style="{BasedOnStyle: llvm, IndentWidth: 4}"' },
         -- css = { "prettier" },
         -- html = { "prettier" },
     },
@@ -19,11 +19,11 @@ local options = {
 conform.setup(options)
 
 -- Automatically format on save for any buffer that supports formatting
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
-    callback = function(args)
-        conform.format { bufnr = args.buf }
-    end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--     pattern = "*",
+--     callback = function(args)
+--         conform.format { bufnr = args.buf }
+--     end,
+-- })
 
 return options
