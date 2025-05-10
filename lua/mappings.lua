@@ -10,21 +10,64 @@ map("i", "jk", "<ESC>")
 map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move Selection Down" })
 map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move Selection Up" })
 
-map("n", "<A-CR>", vim.lsp.buf.code_action, {})
-map("n", "K", vim.lsp.buf.hover, {})
+map("n", "<A-CR>", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
+map("n", "K", vim.lsp.buf.hover, { desc = "LSP Hover Docs" })
+map("n", "<A-r>", vim.lsp.buf.rename, { desc = "LSP Rename" })
 
-map("n", "<leader>cfm", function()
-    require("conform").format()
-end)
+--- COMPILE & RUN
+function _G.run_build_bat()
+    local cwd = vim.fn.getcwd()
+    local build_script = cwd .. "/build.bat"
+
+    if vim.fn.filereadable(build_script) == 0 then
+        print "No build.bat found in current directory."
+        return false
+    end
+
+    local command = string.format([[cmd /c "%s"]], build_script)
+
+    require("nvchad.term").runner {
+        pos = "sp", -- horizontal split
+        cmd = command,
+        id = "build_runner",
+        clear_cmd = false,
+    }
+    return true
+end
+
+map("n", "<leader>cp", function()
+    run_build_bat()
+end, { desc = "Run build.bat using NvTerm" })
+
+map("n", "<leader>cr", function()
+    if not run_build_bat() then
+        return
+    end
+
+    vim.api.nvim_create_autocmd("TermClose", {
+        once = true,
+        callback = function()
+            local exe_files = vim.fn.glob(vim.fn.getcwd() .. "/build/*.exe", false, true)
+            if #exe_files == 0 then
+                print "No .exe found in build/ directory."
+                return
+            elseif #exe_files > 1 then
+                print "Multiple .exe files found; running the first one."
+            end
+
+            vim.cmd("terminal " .. exe_files[1])
+        end,
+    })
+end, { desc = "Build and run .exe using NvTerm" })
 
 --- MENU PLUGIN ---
 -- Keyboard users
-vim.keymap.set("n", "<C-t>", function()
+map("n", "<C-t>", function()
     require("menu").open "default"
 end, {})
 
 -- mouse users + nvimtree users!
-vim.keymap.set({ "n", "v" }, "<RightMouse>", function()
+map({ "n", "v" }, "<RightMouse>", function()
     require("menu.utils").delete_old_menus()
 
     vim.cmd.exec '"normal! \\<RightMouse>"'

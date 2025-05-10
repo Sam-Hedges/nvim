@@ -3,8 +3,8 @@ local conform = require "conform"
 local options = {
     formatters_by_ft = {
         lua = { "stylua" },
-        c = { "clang-format" },
-        cpp = { "clang-format", args = '--style="{BasedOnStyle: llvm, IndentWidth: 4}"' },
+        -- c = { "clang-format" },
+        -- cpp = { "clang-format", args = '--style="{BasedOnStyle: llvm, IndentWidth: 4}"' },
         -- css = { "prettier" },
         -- html = { "prettier" },
     },
