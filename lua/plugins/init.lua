@@ -1,5 +1,18 @@
 return {
     {
+        "rmagatti/auto-session",
+        lazy = false,
+        -- Ensure it loads before most other plugins
+        -- To stop nvchad ui from shitting itself
+        -- Might throw errors again if loading huge buffers
+        priority = 1000,
+        opts = {
+            suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+            -- log_level = 'debug',
+        },
+    },
+
+    {
         "nvchad/ui",
         config = function()
             require "nvchad"
@@ -51,15 +64,6 @@ return {
 
     { "nvzone/volt", lazy = true },
     { "nvzone/menu", lazy = true },
-
-    {
-        "rmagatti/auto-session",
-        lazy = false,
-        opts = {
-            suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-            -- log_level = 'debug',
-        },
-    },
 
     -- test new blink
     -- { import = "nvchad.blink.lazyspec" },
