@@ -1,5 +1,12 @@
 return {
     {
+        "nvchad/ui",
+        config = function()
+            require "nvchad"
+        end,
+    },
+
+    {
         "stevearc/conform.nvim",
         event = "BufWritePre", -- uncomment for format on save
         opts = require "configs.conform",

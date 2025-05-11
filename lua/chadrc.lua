@@ -8,7 +8,9 @@ vim.g.mason_shell = "cmd.exe"
 local M = {}
 
 M.base46 = {
-    theme = "github_dark",
+    -- theme = require "themes.rider_dark",
+    ---@diagnostic disable-next-line
+    theme = "rider_dark",
 
     -- hl_override = {
     -- 	Comment = { italic = true },

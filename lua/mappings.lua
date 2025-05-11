@@ -37,7 +37,7 @@ end
 
 map("n", "<leader>cp", function()
     run_build_bat()
-end, { desc = "Run build.bat using NvTerm" })
+end, { desc = "Compile with build.bat using NvTerm" })
 
 map("n", "<leader>cr", function()
     if not run_build_bat() then
@@ -58,7 +58,7 @@ map("n", "<leader>cr", function()
             vim.cmd("terminal " .. exe_files[1])
         end,
     })
-end, { desc = "Build and run .exe using NvTerm" })
+end, { desc = "Compile and run .exe using NvTerm" })
 
 --- MENU PLUGIN ---
 -- Keyboard users
@@ -78,6 +78,7 @@ map({ "n", "v" }, "<RightMouse>", function()
 
     require("menu").open(options, { mouse = true })
 end, {})
+
 --- MENU PLUGIN ---
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
