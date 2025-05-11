@@ -78,6 +78,7 @@ return {
                 "html",
                 "css",
                 "cpp",
+                "comment",
             },
         },
     },

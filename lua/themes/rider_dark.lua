@@ -47,7 +47,7 @@ M.base_16 = {
     base06 = "#d3dbe3", -- Light fg (not often used)
     base07 = "#dde5ed", -- Light bg (not often used)
     base08 = "#B392E9", -- Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-    base09 = "#ffab70", -- Integers, Boolean, Constants, XML Attributes, Markup Link Url
+    base09 = "#5ca571", -- Yank Highlight, Integers, Boolean, Constants, XML Attributes, Markup Link Url
     base0A = "#ffdf5d", -- Classes, Markup Bold, Search Text Background
     base0B = "#a5d6ff", -- Strings, Inherited Class, Markup Code, Diff Inserted
     base0C = "#83caff", -- Support, regex, escape chars
@@ -72,24 +72,16 @@ M.rider = {
     red = "#DB5C5C",
 }
 
-M.type = "dark"
-
 M.polish_hl = {
     treesitter = {
 
         -- See ' :h treesitter-highlight-groups ' for details.
 
-        ["@punctuation.bracket"] = { fg = M.base_30.white },
-        ["@string"] = { fg = M.base_30.white },
-        ["@variable.member.key"] = { fg = M.base_30.white },
-        ["@constructor"] = { fg = M.base_30.vibrant_green },
-        ["@tag.attribute"] = { link = "@function.method" },
-
         ["@variable"] = { fg = M.rider.light_teal }, -- various variable names
         ["@variable.builtin"] = { fg = M.rider.dark_blue }, -- built-in variable names (e.g. `this`, `self`)
         ["@variable.parameter"] = { fg = M.base_30.white }, -- parameters of a function
         ["@parameter"] = { fg = M.base_30.white }, -- parameters of a function
-        -- ["@variable.parameter.builtin"] = { fg = "111111" }, -- special parameters (e.g. `_`, `it`)
+        ["@variable.parameter.builtin"] = { fg = M.rider.dark_blue }, -- special parameters (e.g. `_`, `it`)
         ["@variable.member"] = { fg = M.rider.light_teal }, -- object and struct fields
 
         ["@constant"] = { fg = M.rider.light_teal }, -- constant identifiers
@@ -117,7 +109,7 @@ M.polish_hl = {
 
         -- ["@attribute"] = { fg = "111111" }, -- attribute annotations (e.g. Python decorators, Rust lifetimes)
         -- ["@attribute.builtin"] = { fg = "111111" }, -- builtin annotations (e.g. `@property` in Python)
-        -- ["@property"] = { fg = "111111" }, -- the key in key/value pairs
+        ["@property"] = { fg = M.rider.light_teal }, -- the key in key/value pairs
 
         ["@function"] = { fg = M.rider.teal }, -- function definitions
         ["@function.builtin"] = { fg = M.rider.teal }, -- built-in functions
@@ -139,7 +131,7 @@ M.polish_hl = {
         ["@keyword.modifier"] = { fg = M.rider.dark_blue }, -- keywords modifying other constructs (e.g. `const`, `static`, `public`)
         ["@keyword.repeat"] = { fg = M.rider.dark_blue }, -- keywords related to loops (e.g. `for`, `while`)
         ["@keyword.return"] = { fg = M.rider.dark_blue }, -- keywords like `return` and `yield`
-        -- ["@keyword.debug"] = { fg = "111111" }, -- keywords related to debugging
+        ["@keyword.debug"] = { fg = M.rider.yellow }, -- keywords related to debugging
         ["@keyword.exception"] = { fg = M.rider.dark_blue }, -- keywords related to exceptions (e.g. `throw`, `catch`)
 
         ["@keyword.conditional"] = { fg = M.rider.dark_blue }, -- keywords related to conditionals (e.g. `if`, `else`)
@@ -154,11 +146,16 @@ M.polish_hl = {
 
         ["@comment"] = { fg = M.rider.green }, -- line and block comments
         ["@comment.documentation"] = { fg = M.rider.dark_green }, -- comments documenting code
+        ["@constant.comment"] = { fg = M.base_30.white }, -- name in a comment
 
-        ["@comment.error"] = { fg = M.rider.yellow }, -- error-type comments (e.g. `ERROR`, `FIXME`, `DEPRECATED`)
-        ["@comment.warning"] = { fg = M.rider.red }, -- warning-type comments (e.g. `WARNING`, `FIX`, `HACK`)
-        ["@comment.todo"] = { fg = M.rider.blue }, -- todo-type comments (e.g. `TODO`, `WIP`)
-        ["@comment.note"] = { fg = M.rider.pink }, -- note-type comments (e.g. `NOTE`, `INFO`, `XXX`)
+        -- error-type comments (e.g. `ERROR`, `FIXME`, `DEPRECATED`)
+        ["@comment.error"] = { fg = M.rider.pink, bg = "none" },
+        -- warning-type comments (e.g. `WARNING`, `FIX`, `HACK`)
+        ["@comment.warning"] = { fg = M.rider.yello, bg = "none" },
+        -- todo-type comments (e.g. `TODO`, `WIP`)
+        ["@comment.todo"] = { fg = M.rider.red, bg = "none" },
+        -- note-type comments (e.g. `NOTE`, `INFO`, `XXX`)
+        ["@comment.note"] = { fg = M.rider.pale_pink, bg = "none" },
 
         ["@tag"] = { fg = M.rider.dark_green }, -- XML-style tag names (e.g. in XML, HTML, etc.)
         ["@tag.builtin"] = { fg = M.rider.dark_green }, -- builtin tag names (e.g. HTML5 tags)
@@ -166,9 +163,12 @@ M.polish_hl = {
         ["@tag.delimiter"] = { fg = M.rider.dark_green }, -- XML-style tag delimiters
     },
 
-    -- semantic_tokens = {
-    --     ["@lsp.type.parameter"] = { link = M.base_30.white },
-    -- },
+    semantic_tokens = {
+        -- Clang is stupid and doesn't actually use many of these
+        ["@lsp.mod.defaultLibrary"] = { fg = M.rider.dark_blue },
+        ["@event"] = { fg = M.rider.pale_pink },
+        ["@lsp.type.struct"] = { fg = M.rider.pale_pink },
+    },
 }
 
 -- set the theme type whether is dark or light
