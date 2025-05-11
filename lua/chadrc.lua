@@ -30,6 +30,10 @@ M.mason = {
     },
 }
 
+M.lsp = {
+    signature = true,
+}
+
 -- M.ui = {
 --       tabufline = {
 --          lazyload = false
