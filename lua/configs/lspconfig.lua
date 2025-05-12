@@ -1,3 +1,11 @@
+local nvchad_lsp = require "nvchad.configs.lspconfig"
+
+-- override their on_init to *not* disable semanticTokens
+nvchad_lsp.on_init = function()
+    -- Allow semantic tokens (do nothing here)
+end
+
+-- continue with your config
 require("nvchad.configs.lspconfig").defaults()
 
 local servers = { "clangd" }
