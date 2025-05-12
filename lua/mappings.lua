@@ -14,6 +14,9 @@ map("n", "<A-CR>", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
 map("n", "K", vim.lsp.buf.hover, { desc = "LSP Hover Docs" })
 map("n", "<A-r>", vim.lsp.buf.rename, { desc = "LSP Rename" })
 
+map("n", "<C-c>", vim.diagnostic.goto_next, { desc = "Next LSP diagnostic" })
+map("n", "<C-S-c>", vim.diagnostic.goto_prev, { desc = "Previous LSP diagnostic" })
+
 --- COMPILE & RUN
 function _G.run_build_bat()
     local cwd = vim.fn.getcwd()

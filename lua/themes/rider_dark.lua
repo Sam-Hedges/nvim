@@ -85,8 +85,8 @@ M.polish_hl = {
         ["@variable.member"] = { fg = M.rider.light_teal }, -- object and struct fields
 
         ["@constant"] = { fg = M.rider.light_teal }, -- constant identifiers
-        ["@constant.builtin"] = { fg = M.rider.light_teal }, -- built-in constant values
-        ["@constant.macro"] = { fg = M.rider.light_teal }, -- constants defined by the preprocessor
+        ["@constant.builtin"] = { fg = M.rider.dark_blue }, -- built-in constant values
+        ["@constant.macro"] = { fg = M.rider.pale_pink }, -- constants defined by the preprocessor
 
         ["@module"] = { fg = M.rider.purple }, -- modules or namespaces
         ["@module.builtin"] = { fg = M.rider.purple }, -- built-in modules or namespaces
@@ -125,7 +125,7 @@ M.polish_hl = {
         ["@keyword"] = { fg = M.rider.dark_blue }, -- keywords not fitting into specific categories
         ["@keyword.coroutine"] = { fg = M.rider.dark_blue }, -- keywords related to coroutines (e.g. `go` in Go, `async/await` in Python)
         ["@keyword.function"] = { fg = M.rider.dark_blue }, -- keywords that define a function (e.g. `func` in Go, `def` in Python)
-        ["@keyword.operator"] = { fg = M.base_30.white }, -- operators that are English words (e.g. `and`, `or`)
+        ["@keyword.operator"] = { fg = M.rider.dark_blue }, -- operators that are English words (e.g. `and`, `or`)
         ["@keyword.import"] = { fg = M.rider.dark_blue }, -- keywords for including or exporting modules (e.g. `import`, `from` in Python)
         ["@keyword.type"] = { fg = M.rider.dark_blue }, -- keywords describing namespaces and composite types (e.g. `struct`, `enum`)
         ["@keyword.modifier"] = { fg = M.rider.dark_blue }, -- keywords modifying other constructs (e.g. `const`, `static`, `public`)
@@ -137,8 +137,8 @@ M.polish_hl = {
         ["@keyword.conditional"] = { fg = M.rider.dark_blue }, -- keywords related to conditionals (e.g. `if`, `else`)
         ["@keyword.conditional.ternary"] = { fg = M.base_30.white }, -- ternary operator (e.g. `?`, `:`)
 
-        ["@keyword.directive"] = { fg = M.rider.purple }, -- various preprocessor directives and shebangs
-        ["@keyword.directive.define"] = { fg = M.rider.purple }, -- preprocessor definition directives
+        ["@keyword.directive"] = { fg = M.rider.dark_blue }, -- various preprocessor directives and shebangs
+        ["@keyword.directive.define"] = { fg = M.rider.dark_blue }, -- preprocessor definition directives
 
         ["@punctuation.delimiter"] = { fg = M.base_30.white }, -- delimiters (e.g. `;`, `.`, `,`)
         ["@punctuation.bracket"] = { fg = M.base_30.white }, -- brackets (e.g. `()`, `{}`, `[]`)
