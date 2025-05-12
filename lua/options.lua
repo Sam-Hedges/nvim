@@ -1,13 +1,16 @@
 require "nvchad.options"
+local opt = vim.o
 
 -- Custom Options!
-vim.opt.relativenumber = true
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.scrolloff = 10
-vim.opt.cursorlineopt = "both"
+opt.relativenumber = true
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = true
+opt.scrolloff = 10
+opt.cursorlineopt = "both"
+opt.autoindent = true
+opt.smartindent = true
 
 -- Highlights the yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
