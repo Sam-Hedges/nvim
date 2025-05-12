@@ -38,7 +38,15 @@ function _G.run_build_bat()
     return true
 end
 
-function _G.run_built_exe()
+map("n", "<leader>cp", function()
+    run_build_bat()
+end, { desc = "Compile with build.bat using NvTerm" })
+
+map("n", "<leader>cr", function()
+    if not run_build_bat() then
+        return
+    end
+
     vim.api.nvim_create_autocmd("TermClose", {
         once = true,
         callback = function()
@@ -53,21 +61,41 @@ function _G.run_built_exe()
             vim.cmd("terminal " .. exe_files[1])
         end,
     })
-end
-
-map("n", "<leader>cp", function()
-    run_build_bat()
-end, { desc = "Compile with build.bat using NvTerm" })
-
-map("n", "<leader>cr", function()
-    if not run_build_bat() then
-        return
-    end
-    run_built_exe()
 end, { desc = "Compile and run .exe using NvTerm" })
 
 map("n", "<leader>rr", function()
-    run_built_exe()
+    local exe_files = vim.fn.glob(vim.fn.getcwd() .. "/build/*.exe", false, true)
+    if #exe_files == 0 then
+        print "No .exe found in build/ directory."
+        return
+    elseif #exe_files > 1 then
+        print "Multiple .exe files found; running the first one."
+    end
+
+    local exe_path = exe_files[1]
+    local command = string.format([[cmd /c "%s"]], exe_path)
+
+    require("nvchad.term").runner {
+        pos = "sp",
+        cmd = command,
+        id = "build_runner",
+        clear_cmd = false,
+    }
+
+    -- Autocmd to close terminal buffer after it exits
+    vim.api.nvim_create_autocmd("TermClose", {
+        pattern = "*",
+        once = true,
+        callback = function(args)
+            -- Double check it's the right buffer (optional)
+            local bufnr = args.buf
+            vim.schedule(function()
+                if vim.api.nvim_buf_is_valid(bufnr) then
+                    vim.api.nvim_buf_delete(bufnr, { force = true })
+                end
+            end)
+        end,
+    })
 end, { desc = "Rerun compiled .exe using nvterm" })
 
 --- MENU PLUGIN ---
