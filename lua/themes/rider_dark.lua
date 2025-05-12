@@ -151,7 +151,7 @@ M.polish_hl = {
         -- error-type comments (e.g. `ERROR`, `FIXME`, `DEPRECATED`)
         ["@comment.error"] = { fg = M.rider.pink, bg = "none" },
         -- warning-type comments (e.g. `WARNING`, `FIX`, `HACK`)
-        ["@comment.warning"] = { fg = M.rider.yello, bg = "none" },
+        ["@comment.warning"] = { fg = M.rider.yellow, bg = "none" },
         -- todo-type comments (e.g. `TODO`, `WIP`)
         ["@comment.todo"] = { fg = M.rider.red, bg = "none" },
         -- note-type comments (e.g. `NOTE`, `INFO`, `XXX`)
