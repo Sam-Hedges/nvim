@@ -38,15 +38,7 @@ function _G.run_build_bat()
     return true
 end
 
-map("n", "<leader>cp", function()
-    run_build_bat()
-end, { desc = "Compile with build.bat using NvTerm" })
-
-map("n", "<leader>cr", function()
-    if not run_build_bat() then
-        return
-    end
-
+function _G.run_built_exe()
     vim.api.nvim_create_autocmd("TermClose", {
         once = true,
         callback = function()
@@ -61,7 +53,22 @@ map("n", "<leader>cr", function()
             vim.cmd("terminal " .. exe_files[1])
         end,
     })
+end
+
+map("n", "<leader>cp", function()
+    run_build_bat()
+end, { desc = "Compile with build.bat using NvTerm" })
+
+map("n", "<leader>cr", function()
+    if not run_build_bat() then
+        return
+    end
+    run_built_exe()
 end, { desc = "Compile and run .exe using NvTerm" })
+
+map("n", "<leader>rr", function()
+    run_built_exe()
+end, { desc = "Rerun compiled .exe using nvterm" })
 
 --- MENU PLUGIN ---
 -- Keyboard users
