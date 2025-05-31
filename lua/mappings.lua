@@ -17,6 +17,8 @@ map("n", "<A-r>", vim.lsp.buf.rename, { desc = "LSP Rename" })
 map("n", "<C-c>", vim.diagnostic.goto_next, { desc = "Next LSP diagnostic" })
 map("n", "<C-S-c>", vim.diagnostic.goto_prev, { desc = "Previous LSP diagnostic" })
 
+map("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "Telescope Go To References" })
+
 --- COMPILE & RUN
 function _G.run_build_bat()
     local cwd = vim.fn.getcwd()
