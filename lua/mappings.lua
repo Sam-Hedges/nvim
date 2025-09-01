@@ -19,6 +19,9 @@ map("n", "<C-S-c>", vim.diagnostic.goto_prev, { desc = "Previous LSP diagnostic"
 
 map("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "Telescope Go To References" })
 
+--- Map Alt+v to Visual Block mode ---
+map("n", "<A-v>", "<C-v>", { desc = "Enter Visual Block mode" })
+
 --- COMPILE & RUN
 function _G.run_build_bat()
     local cwd = vim.fn.getcwd()
