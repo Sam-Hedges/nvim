@@ -18,10 +18,9 @@ vim.lsp.enable(servers)
 
 local on_attach = require("nvchad.configs.lspconfig").on_attach
 local capabilities = require("nvchad.configs.lspconfig").capabilities
-local lspconfig = require "lspconfig"
 
 -- Lua setup
-lspconfig.lua_ls.setup {
+vim.lsp.config("lua_ls", {
     settings = {
         Lua = {
             runtime = {
@@ -44,9 +43,9 @@ lspconfig.lua_ls.setup {
         on_attach(client, bufnr)
     end,
     capabilities = capabilities,
-}
+})
 
--- lspconfig.clangd.setup {
+-- vim.lsp.config("clangd", {
 --     cmd = {
 --         "clangd",
 --         "--fallback-style={BasedOnStyle: llvm, IndentWidth: 4}",
@@ -66,4 +65,4 @@ lspconfig.lua_ls.setup {
 --     on_init = function() end,
 --
 --     capabilities = capabilities,
--- }
+-- })
