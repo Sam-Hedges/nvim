@@ -8,8 +8,7 @@ end
 -- continue with your config
 require("nvchad.configs.lspconfig").defaults()
 
-local servers = { "clangd" }
-vim.lsp.enable(servers)
+local servers = { "clangd", "pyright" }
 
 -- DO NOT import nvchad's `on_init`, it disables semantic tokens
 -- LIGMA BALLS NVCHAD WHY TF DO YOU NOT MENTION THIS IN THE DOCS
@@ -45,6 +44,39 @@ vim.lsp.config("lua_ls", {
     capabilities = capabilities,
 })
 
+vim.lsp.config("pyright", {
+    settings = {
+        python = {
+            analysis = {
+                typeCheckingMode = "basic", -- or "off" / "strict"
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = "workspace",
+            },
+        },
+    },
+
+    -- DO NOT use nvchad_lsp.on_init
+    on_init = function()
+        -- leave empty to preserve semantic tokens
+    end,
+
+    on_attach = function(client, bufnr)
+        -- Pyright doesn't format, but disable anyway just in case
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+
+        -- ensure semantic tokens actually start
+        if client.server_capabilities.semanticTokensProvider then
+            vim.lsp.semantic_tokens.start(bufnr, client.id)
+        end
+
+        on_attach(client, bufnr)
+    end,
+
+    capabilities = capabilities,
+})
+
 -- vim.lsp.config("clangd", {
 --     cmd = {
 --         "clangd",
@@ -66,3 +98,5 @@ vim.lsp.config("lua_ls", {
 --
 --     capabilities = capabilities,
 -- })
+
+vim.lsp.enable(servers)
