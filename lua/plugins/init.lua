@@ -82,4 +82,32 @@ return {
             },
         },
     },
+
+    {
+        "m4xshen/hardtime.nvim",
+        lazy = false,
+        dependencies = { "MunifTanjim/nui.nvim" },
+        opts = {
+            disable_mouse = false,
+            restriction_mode = "hint",
+            disabled_keys = {
+                ["<Up>"] = {},
+                ["<Down>"] = {},
+                ["<Left>"] = {},
+                ["<Right>"] = {},
+            },
+            callback = function(text)
+                vim.notify(text, vim.log.levels.INFO, { title = "Hint", timeout = 3000 })
+            end,
+        },
+    },
+
+    {
+        "rcarriga/nvim-notify",
+        lazy = false,
+        opts = {},
+        config = function()
+            vim.notify = require "notify"
+        end,
+    },
 }
