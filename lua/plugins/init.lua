@@ -96,6 +96,12 @@ return {
                 ["<Left>"] = {},
                 ["<Right>"] = {},
             },
+            restricted_keys = {
+                ["h"] = {},
+                ["j"] = {},
+                ["k"] = {},
+                ["l"] = {},
+            },
             callback = function(text)
                 vim.notify(text, vim.log.levels.INFO, { title = "Hint", timeout = 3000 })
             end,
