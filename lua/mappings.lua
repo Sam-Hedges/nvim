@@ -12,7 +12,11 @@ map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move Selection Up" })
 
 map("n", "<A-CR>", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
 map("n", "K", vim.lsp.buf.hover, { desc = "LSP Hover Docs" })
-map("n", "<A-r>", vim.lsp.buf.rename, { desc = "LSP Rename" })
+
+-- map("n", "<A-r>", vim.lsp.buf.rename, { desc = "LSP Rename" })
+map("n", "<A-r>", function()
+    require "nvchad.lsp.renamer"()
+end, { desc = "LSP Rename" })
 
 map("n", "<C-c>", function()
     vim.diagnostic.jump { count = 1, float = true }
@@ -20,6 +24,15 @@ end, { desc = "Next LSP diagnostic" })
 map("n", "<C-S-c>", function()
     vim.diagnostic.jump { count = -1, float = true }
 end, { desc = "Previous LSP diagnostic" })
+
+-- Move buffer left/right in the tabline
+map("n", "<A-h>", function()
+    require("nvchad.tabufline").move_buf(-1)
+end, { desc = "Buffer move left" })
+
+map("n", "<A-l>", function()
+    require("nvchad.tabufline").move_buf(1)
+end, { desc = "Buffer move right" })
 
 map("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "Telescope Go To References" })
 
