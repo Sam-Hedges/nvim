@@ -23,6 +23,9 @@ end, { desc = "Previous LSP diagnostic" })
 
 map("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "Telescope Go To References" })
 
+--- Mapping for Outline for LSP symbols---
+map("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
+
 --- Map Alt+v to Visual Block mode ---
 map("n", "<A-v>", "<C-v>", { desc = "Enter Visual Block mode" })
 
