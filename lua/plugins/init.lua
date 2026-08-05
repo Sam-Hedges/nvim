@@ -79,6 +79,7 @@ return {
                 "css",
                 "cpp",
                 "comment",
+                "hlsl",
             },
         },
     },
