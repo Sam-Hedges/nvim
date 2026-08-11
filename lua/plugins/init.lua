@@ -136,4 +136,9 @@ return {
             }
         end,
     },
+
+    {
+        "rluba/jai.vim",
+        lazy = false,
+    },
 }
